@@ -1,4 +1,5 @@
-using FEGProject.API.Contexts;
+using FEGProjectData.Contexts;
+using FEGProjectData.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,10 +27,38 @@ namespace FEGProject.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = _configuration["connectionSrting:FEGProjectDBConnectinString"];
-            services.AddDbContext<FEGProjectContext>(o =>
+
+            services.AddDbContext<FEGProjectContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DatabaseConnection")));
+            //services.AddScoped<IStudentRepository, StudentRepository>();
+
+            services.AddControllers();
+
+            //var contact = new OpenApiContact()
+            //{
+            //    Name = "FirstName LastName",
+            //    Email = "user@example.com",
+            //    Url = new Uri("http://www.example.com")
+            //};
+
+            //var license = new OpenApiLicense()
+            //{
+            //    Name = "My License",
+            //    Url = new Uri("http://www.example.com")
+            //};
+
+            var info = new OpenApiInfo()
             {
-                o.UseSqlServer(connectionString);
+                Version = "v1",
+                Title = "Swagger Demo API",
+                Description = "Swagger Demo API Description",
+                TermsOfService = new Uri("http://www.example.com"),
+               // Contact = contact,
+               // License = license
+            };
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", info);
             });
         }
 
@@ -41,14 +71,23 @@ namespace FEGProject.API
             }
 
             app.UseRouting();
+            app.UseStatusCodePages();
 
-            app.UseEndpoints(endpoints =>
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json",
+                "Swagger Demo API v1");
+            });
+            
+
+            /*app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Hello World!");
                 });
-            });
+            });*/
         }
     }
 }
