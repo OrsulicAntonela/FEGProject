@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "5g5Lv3n/+S7v1eq74Cb19Y4i6dyfZ0J1nmwguyh5cFVAWUnOBPyngoOMJd1M9pESGAEyUSvSjeDW8xZNB4LPKQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\aorsulic\\Desktop\\Antonela\\FEGProject\\FEG.API\\FEG.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\aorsulic\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\aorsulic\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\aorsulic\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\aorsulic\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\aorsulic\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\aorsulic\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}

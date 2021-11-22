@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FEGProject.API", "FEGProject.API\FEGProject.API.csproj", "{86AA112F-CFEF-46B1-B298-67EB0A7E7F48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEGProjectData", "FEGProjectData\FEGProjectData.csproj", "{AEA7683C-A0A4-48B6-804F-E8CD8E1F478E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FEGProjectData", "FEGProjectData\FEGProjectData.csproj", "{AEA7683C-A0A4-48B6-804F-E8CD8E1F478E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

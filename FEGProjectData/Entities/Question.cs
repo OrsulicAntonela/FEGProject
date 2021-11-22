@@ -8,10 +8,6 @@ namespace FEGProjectData.Entities
 {
     public class Question
     {
-        public Question()
-        {
-            this.Exams = new HashSet<Exam>();
-        }
         public int QuestionId { get; set; }
         [Required]
         [MaxLength(256)]
@@ -19,7 +15,9 @@ namespace FEGProjectData.Entities
         [Required]
         public int Type { get; set; }
 
-        public virtual ICollection<Exam> Exams { get; set; }
+        public int ExamId { get; set; }
+        public Exam Exam { get; set; }
+
         public ICollection<QuestionOption> QuestionOption { get; set; }
         public ICollection<StudentAnswer> StudentAnswer { get; set; }
 

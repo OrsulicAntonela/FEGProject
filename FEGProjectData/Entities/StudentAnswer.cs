@@ -16,7 +16,7 @@ namespace FEGProjectData.Entities
         public int StudentAssignedExamId { get; set; }
         public StudentAssignedExam StudentAssignedExam { get; set; }
 
-        public int QuestionId { get; set; }
+        public int? QuestionId { get; set; }
         public Question Question { get; set; }
 
     }

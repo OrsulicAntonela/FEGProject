@@ -4,7 +4,6 @@ C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\bin\Debug\net5.0\FE
 C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\bin\Debug\net5.0\FEGProjectData.dll
 C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\bin\Debug\net5.0\ref\FEGProjectData.dll
 C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\bin\Debug\net5.0\FEGProjectData.pdb
-C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\obj\Debug\net5.0\FEGProjectData.csproj.AssemblyReference.cache
 C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\obj\Debug\net5.0\FEGProjectData.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\obj\Debug\net5.0\FEGProjectData.AssemblyInfoInputs.cache
 C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\obj\Debug\net5.0\FEGProjectData.AssemblyInfo.cs
@@ -13,3 +12,4 @@ C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\obj\Debug\net5.0\FE
 C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\obj\Debug\net5.0\ref\FEGProjectData.dll
 C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\obj\Debug\net5.0\FEGProjectData.pdb
 C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\obj\Debug\net5.0\FEGProjectData.genruntimeconfig.cache
+C:\Users\aorsulic\Desktop\Antonela\FEGProject\FEGProjectData\obj\Debug\net5.0\FEGProjectData.csproj.AssemblyReference.cache

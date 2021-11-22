@@ -11,14 +11,13 @@ namespace FEGProjectData.Entities
         public int StudentId { get; set; }
         [Required]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
         [Required]
         [MaxLength(100)]
-        public string Surname { get; set; }
+        public string LastName { get; set; }
         [Required]
         [MaxLength(100)]
         public string Adderss { get; set; }
-        [Required]
         [MaxLength(100)]
         public string EmailAddress { get; set; }
 

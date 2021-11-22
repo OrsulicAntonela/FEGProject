@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,38 +28,19 @@ namespace FEGProject.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore);
+            services
+                .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
+                .AddDbContext<FEGProjectContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DatabaseConnection")))
+                .AddScoped<StudentRepository>()
+                .AddScoped<QuestionRepository>()
+                .AddScoped<ExamRepository>();
 
-            services.AddDbContext<FEGProjectContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DatabaseConnection")));
-            //services.AddScoped<IStudentRepository, StudentRepository>();
 
-            services.AddControllers();
-
-            //var contact = new OpenApiContact()
-            //{
-            //    Name = "FirstName LastName",
-            //    Email = "user@example.com",
-            //    Url = new Uri("http://www.example.com")
-            //};
-
-            //var license = new OpenApiLicense()
-            //{
-            //    Name = "My License",
-            //    Url = new Uri("http://www.example.com")
-            //};
-
-            var info = new OpenApiInfo()
-            {
-                Version = "v1",
-                Title = "Swagger Demo API",
-                Description = "Swagger Demo API Description",
-                TermsOfService = new Uri("http://www.example.com"),
-               // Contact = contact,
-               // License = license
-            };
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", info);
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FEGProject.API", Version = "v1" });
             });
         }
 
@@ -69,17 +51,32 @@ namespace FEGProject.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler();
+            }
 
+
+            //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseStatusCodePages();
+
+            //app.UseAuthorization();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json",
-                "Swagger Demo API v1");
+                "FEGProject.API v1");
             });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
             
+
 
             /*app.UseEndpoints(endpoints =>
             {

@@ -34,21 +34,6 @@ namespace FEGProjectData.Migrations
                     b.ToTable("AssignedExamGroup");
                 });
 
-            modelBuilder.Entity("ExamQuestion", b =>
-                {
-                    b.Property<int>("ExamsExamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuestionsQuestionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ExamsExamId", "QuestionsQuestionId");
-
-                    b.HasIndex("QuestionsQuestionId");
-
-                    b.ToTable("ExamQuestion");
-                });
-
             modelBuilder.Entity("FEGProjectData.Entities.AssignedExam", b =>
                 {
                     b.Property<int>("AssignedExamId")
@@ -62,9 +47,10 @@ namespace FEGProjectData.Migrations
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Password")
+                    b.Property<string>("Password")
+                        .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("AssignedExamId");
 
@@ -114,6 +100,9 @@ namespace FEGProjectData.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -123,6 +112,8 @@ namespace FEGProjectData.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("QuestionId");
+
+                    b.HasIndex("ExamId");
 
                     b.ToTable("Questions");
                 });
@@ -134,9 +125,8 @@ namespace FEGProjectData.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Option")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1)");
+                    b.Property<int>("Option")
+                        .HasColumnType("int");
 
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
@@ -166,6 +156,10 @@ namespace FEGProjectData.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("EmailAddress")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -173,12 +167,7 @@ namespace FEGProjectData.Migrations
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Surname")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -202,7 +191,7 @@ namespace FEGProjectData.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
-                    b.Property<int>("QuestionId")
+                    b.Property<int?>("QuestionId")
                         .HasColumnType("int");
 
                     b.Property<int>("StudentAssignedExamId")
@@ -260,25 +249,21 @@ namespace FEGProjectData.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ExamQuestion", b =>
-                {
-                    b.HasOne("FEGProjectData.Entities.Exam", null)
-                        .WithMany()
-                        .HasForeignKey("ExamsExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FEGProjectData.Entities.Question", null)
-                        .WithMany()
-                        .HasForeignKey("QuestionsQuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("FEGProjectData.Entities.AssignedExam", b =>
                 {
                     b.HasOne("FEGProjectData.Entities.Exam", "Exam")
                         .WithMany("AssignedExams")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+                });
+
+            modelBuilder.Entity("FEGProjectData.Entities.Question", b =>
+                {
+                    b.HasOne("FEGProjectData.Entities.Exam", "Exam")
+                        .WithMany("Question")
                         .HasForeignKey("ExamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -312,9 +297,7 @@ namespace FEGProjectData.Migrations
                 {
                     b.HasOne("FEGProjectData.Entities.Question", "Question")
                         .WithMany("StudentAnswer")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("QuestionId");
 
                     b.HasOne("FEGProjectData.Entities.StudentAssignedExam", "StudentAssignedExam")
                         .WithMany("StudentAnswer")
@@ -354,6 +337,8 @@ namespace FEGProjectData.Migrations
             modelBuilder.Entity("FEGProjectData.Entities.Exam", b =>
                 {
                     b.Navigation("AssignedExams");
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("FEGProjectData.Entities.Group", b =>

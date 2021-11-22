@@ -10,7 +10,7 @@ namespace FEGProjectData.Entities
     {
         public int QuestionOptionId { get; set; }
         [Required]
-        public char Option { get; set; }
+        public int Option { get; set; }
         [Required]
         [MaxLength(256)]
         public string Text { get; set; }

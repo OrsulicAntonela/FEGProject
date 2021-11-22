@@ -17,13 +17,13 @@ namespace FEGProjectData.Entities
         public DateTime Deadline { get; set; }
         [Required]
         [MaxLength(256)]
-        public int Password { get; set; }
+        public string Password { get; set; }
 
         public int ExamId { get; set; }
         public Exam Exam { get; set; }
 
         public ICollection<StudentAssignedExam> StudentAssignedExam { get; set; }
-        public virtual ICollection<Group> Groups { get; set; }
+        public ICollection<Group> Groups { get; set; }
 
     }
 }

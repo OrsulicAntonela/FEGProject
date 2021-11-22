@@ -18,7 +18,7 @@ namespace FEGProjectData.Entities
         public string Name { get; set; }
 
         public ICollection<Student> Student { get; set; }
-        public virtual ICollection<AssignedExam> AssignedExams { get; set; }
+        public ICollection<AssignedExam> AssignedExams { get; set; }
 
     }
 }

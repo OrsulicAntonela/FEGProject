@@ -7,22 +7,23 @@ using System.Threading.Tasks;
 
 namespace FEGProjectData.Repository
 {
-    public class StudentRepository : IStudentRepository
+    public class StudentRepository 
     {
         private readonly FEGProjectContext _context;
 
         public StudentRepository(FEGProjectContext context)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
         public IEnumerable<Student> GetAll()
         {
-            return _context.Students.OrderBy(s => s.Surname).ThenBy(s => s.Name).ToList();
+            return _context.Students.OrderBy(s => s.LastName).ThenBy(s => s.FirstName).ToList();
         }
 
         public Student GetStudent(int studentId)
         {
             return _context.Students.Where(s => s.StudentId == studentId).FirstOrDefault();
         }
+
     }
 }
