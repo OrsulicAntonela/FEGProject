@@ -150,7 +150,7 @@ namespace FEGProjectData.Migrations
                     StudentAssignedExamId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DeliveryTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Result = table.Column<double>(type: "float", nullable: false),
+                    Result = table.Column<double>(type: "float", nullable: true),
                     StudentId = table.Column<int>(type: "int", nullable: false),
                     AssignedExamId = table.Column<int>(type: "int", nullable: false)
                 },

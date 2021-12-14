@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FEGProjectData.Entities
 {
     public class StudentAssignedExam
     {
         public int StudentAssignedExamId { get; set; }
-        [Required]
         public DateTime DeliveryTime { get; set; }
-        public double Result { get; set; }
+        public double? Result { get; set; }
 
         public int StudentId { get; set; }
         public Student Student { get; set; }
@@ -19,7 +15,7 @@ namespace FEGProjectData.Entities
         public int AssignedExamId { get; set; }
         public AssignedExam AssignedExam { get; set; }
 
-        public ICollection<StudentAnswer> StudentAnswer { get; set; }
+        public ICollection<StudentAnswer> StudentAnswers { get; set; }
 
 
     }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FEGProjectData.Entities
 {
@@ -18,8 +15,8 @@ namespace FEGProjectData.Entities
         public int ExamId { get; set; }
         public Exam Exam { get; set; }
 
-        public ICollection<QuestionOption> QuestionOption { get; set; }
-        public ICollection<StudentAnswer> StudentAnswer { get; set; }
+        public ICollection<QuestionOption> QuestionOptions { get; set; }
+        public ICollection<StudentAnswer> StudentAnswers { get; set; }
 
     }
 }

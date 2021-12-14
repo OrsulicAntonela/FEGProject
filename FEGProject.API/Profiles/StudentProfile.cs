@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using FEGProject.API.Models;
+using FEGProjectData.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,9 @@ namespace FEGProject.API.Profiles
     {
         public StudentProfile()
         {
-            CreateMap<FEGProjectData.Entities.Student, Models.StudentDto>();
+            CreateMap<Student, StudentDto>();
+            CreateMap<StudentDto, Student>();
+            CreateMap<Group, GroupDto>().ReverseMap();
         }
     }
 }

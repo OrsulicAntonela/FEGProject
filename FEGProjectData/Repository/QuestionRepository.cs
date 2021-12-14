@@ -2,10 +2,7 @@
 using FEGProjectData.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace FEGProjectData.Repository
@@ -23,17 +20,11 @@ namespace FEGProjectData.Repository
             _context.Questions.Add(question);
             Save();
         }
-        public Question GetQuestion(int examId, int questionId)
+        public Question GetQuestion(int questionId)
         {
-            return _context.Questions
-                .Include(q => q.QuestionOption)
-                .Where(e => e.ExamId == examId)
+            return _context.Questions.Include(q => q.QuestionOptions)
                 .Where(q => q.QuestionId == questionId)
                 .FirstOrDefault();
-        }
-        public bool QuestionExists(int examId, int questionId)
-        {
-            return _context.Questions.Where(e => e.ExamId == examId).Any(q => q.QuestionId == questionId);
         }
         public void Save()
         {

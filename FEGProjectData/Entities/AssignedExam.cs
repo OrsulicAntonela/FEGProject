@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FEGProjectData.Entities
 {
@@ -22,7 +20,7 @@ namespace FEGProjectData.Entities
         public int ExamId { get; set; }
         public Exam Exam { get; set; }
 
-        public ICollection<StudentAssignedExam> StudentAssignedExam { get; set; }
+        public ICollection<StudentAssignedExam> StudentAssignedExams { get; set; }
         public ICollection<Group> Groups { get; set; }
 
     }

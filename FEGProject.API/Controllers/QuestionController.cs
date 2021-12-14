@@ -2,12 +2,8 @@
 using FEGProject.API.Models;
 using FEGProjectData.Entities;
 using FEGProjectData.Repository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FEGProject.API.Controllers
 {
@@ -24,15 +20,10 @@ namespace FEGProject.API.Controllers
             _questionRepository = questionRepository ?? throw new ArgumentNullException(nameof(questionRepository));
         }
 
-        [HttpGet("{questionId}", Name ="GetQuestion")]
-        public IActionResult GetQuestion(int examId, int questionId)
+        [HttpGet("{questionId}")]
+        public IActionResult GetQuestion(int questionId)
         {
-            if (!_questionRepository.QuestionExists(examId, questionId))
-            {
-                return NotFound();
-            }
-
-            var question = _questionRepository.GetQuestion(examId, questionId);
+            var question = _questionRepository.GetQuestion(questionId);
 
             if (question == null)
             {
@@ -43,35 +34,50 @@ namespace FEGProject.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateQuestion(int examId, [FromBody] QuestionForCreationDto question)
+        public IActionResult CreateQuestion(int examId, [FromBody] QuestionDto question)
         {
-            if (string.IsNullOrEmpty(question.Text))
-            {
-                ModelState.AddModelError(
-                    "Text",
-                    "Text can't be empty");
-            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            
+
+            if (question.Type == 1)
+            {
+                question.QuestionOptions.Clear();
+            }
+            else
+            {
+                if(question.QuestionOptions==null || question.QuestionOptions.Count==0 || question.QuestionOptions.Count == 1)
+                {
+                    return BadRequest();
+                }
+            }
             var questionEntity = _mapper.Map<Question>(question);
 
             _questionRepository.AddQuestion(examId, questionEntity);
 
-            var createdQuestion = _mapper.Map<QuestionDto>(questionEntity);
-
-            return CreatedAtRoute("GetQuestion", new { examId, questionId = createdQuestion.QuestionId }, createdQuestion);
+            return Ok(_mapper.Map<QuestionDto>(questionEntity));
         }
 
         [HttpPost("edit/{questionId}")]
-        public IActionResult EditQuestion(int examId, int questionId, [FromBody] QuestionForEditDto question)
+        public IActionResult EditQuestion(int questionId, [FromBody] QuestionDto question)
         {
-            var questionEntity = _questionRepository.GetQuestion(examId, questionId);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var questionEntity = _questionRepository.GetQuestion(questionId);
+
+            if (questionEntity == null)
+            {
+                return NotFound();
+            }
+
             _mapper.Map(question, questionEntity);
             _questionRepository.Save();
-            return NoContent();
+
+            return Ok();
         }
     }
 }

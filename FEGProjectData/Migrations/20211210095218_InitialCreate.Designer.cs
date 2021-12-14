@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FEGProjectData.Migrations
 {
     [DbContext(typeof(FEGProjectContext))]
-    [Migration("20211119092424_InitialCreate")]
+    [Migration("20211210095218_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -221,7 +221,7 @@ namespace FEGProjectData.Migrations
                     b.Property<DateTime>("DeliveryTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Result")
+                    b.Property<double?>("Result")
                         .HasColumnType("float");
 
                     b.Property<int>("StudentId")
@@ -265,7 +265,7 @@ namespace FEGProjectData.Migrations
             modelBuilder.Entity("FEGProjectData.Entities.Question", b =>
                 {
                     b.HasOne("FEGProjectData.Entities.Exam", "Exam")
-                        .WithMany("Question")
+                        .WithMany("Questions")
                         .HasForeignKey("ExamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -276,7 +276,7 @@ namespace FEGProjectData.Migrations
             modelBuilder.Entity("FEGProjectData.Entities.QuestionOption", b =>
                 {
                     b.HasOne("FEGProjectData.Entities.Question", "Question")
-                        .WithMany("QuestionOption")
+                        .WithMany("QuestionOptions")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -287,7 +287,7 @@ namespace FEGProjectData.Migrations
             modelBuilder.Entity("FEGProjectData.Entities.Student", b =>
                 {
                     b.HasOne("FEGProjectData.Entities.Group", "Group")
-                        .WithMany("Student")
+                        .WithMany("Students")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -298,11 +298,11 @@ namespace FEGProjectData.Migrations
             modelBuilder.Entity("FEGProjectData.Entities.StudentAnswer", b =>
                 {
                     b.HasOne("FEGProjectData.Entities.Question", "Question")
-                        .WithMany("StudentAnswer")
+                        .WithMany("StudentAnswers")
                         .HasForeignKey("QuestionId");
 
                     b.HasOne("FEGProjectData.Entities.StudentAssignedExam", "StudentAssignedExam")
-                        .WithMany("StudentAnswer")
+                        .WithMany("StudentAnswers")
                         .HasForeignKey("StudentAssignedExamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -315,13 +315,13 @@ namespace FEGProjectData.Migrations
             modelBuilder.Entity("FEGProjectData.Entities.StudentAssignedExam", b =>
                 {
                     b.HasOne("FEGProjectData.Entities.AssignedExam", "AssignedExam")
-                        .WithMany("StudentAssignedExam")
+                        .WithMany("StudentAssignedExams")
                         .HasForeignKey("AssignedExamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FEGProjectData.Entities.Student", "Student")
-                        .WithMany("StudentAssignedExam")
+                        .WithMany("StudentAssignedExams")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -333,36 +333,36 @@ namespace FEGProjectData.Migrations
 
             modelBuilder.Entity("FEGProjectData.Entities.AssignedExam", b =>
                 {
-                    b.Navigation("StudentAssignedExam");
+                    b.Navigation("StudentAssignedExams");
                 });
 
             modelBuilder.Entity("FEGProjectData.Entities.Exam", b =>
                 {
                     b.Navigation("AssignedExams");
 
-                    b.Navigation("Question");
+                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("FEGProjectData.Entities.Group", b =>
                 {
-                    b.Navigation("Student");
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("FEGProjectData.Entities.Question", b =>
                 {
-                    b.Navigation("QuestionOption");
+                    b.Navigation("QuestionOptions");
 
-                    b.Navigation("StudentAnswer");
+                    b.Navigation("StudentAnswers");
                 });
 
             modelBuilder.Entity("FEGProjectData.Entities.Student", b =>
                 {
-                    b.Navigation("StudentAssignedExam");
+                    b.Navigation("StudentAssignedExams");
                 });
 
             modelBuilder.Entity("FEGProjectData.Entities.StudentAssignedExam", b =>
                 {
-                    b.Navigation("StudentAnswer");
+                    b.Navigation("StudentAnswers");
                 });
 #pragma warning restore 612, 618
         }
